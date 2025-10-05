@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://d0ajdnn5pngx4"]
+
+[ext_resource type="Script" uid="uid://dlsygyd35nb1w" path="res://scripts/resources/weapon_resource.gd" id="1_jacif"]
+
+[resource]
+script = ExtResource("1_jacif")
+damage = 25.0
+has_falloff = true
+falloff_rate = 10.0
+minimum_falloff_damage = 21.0
+round_reload_time = 0.2
+firing_cooldown = 0.15
+knockback_force = 0.1
+magazine_size = 12
+metadata/_custom_type_script = "uid://dlsygyd35nb1w"

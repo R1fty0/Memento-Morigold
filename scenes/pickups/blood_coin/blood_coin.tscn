@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjyq7cr622dj"]
+
+[ext_resource type="Script" uid="uid://bi0urmba0thn1" path="res://scenes/pickups/blood_coin/blood_coin.gd" id="1_hxbk5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6deyb"]
+albedo_color = Color(0.470588, 0.0235294, 0.0235294, 0.988235)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hxbk5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_famdg"]
+height = 0.130127
+
+[node name="BloodCoin" type="Area3D"]
+transform = Transform3D(-0.0172795, 0.999815, 0.00844807, -0.999818, -0.0172096, -0.00826624, -0.00811935, -0.00858933, 0.99993, 0, 0, 0)
+script = ExtResource("1_hxbk5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0528031, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6deyb")
+mesh = SubResource("CylinderMesh_hxbk5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00012207, 0)
+shape = SubResource("CylinderShape3D_famdg")

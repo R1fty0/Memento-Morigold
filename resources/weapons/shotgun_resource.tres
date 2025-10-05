@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://duioc0hydsgvx"]
+
+[ext_resource type="Script" uid="uid://dlsygyd35nb1w" path="res://scripts/resources/weapon_resource.gd" id="1_0lo2k"]
+
+[resource]
+script = ExtResource("1_0lo2k")
+damage = 100.0
+has_falloff = true
+falloff_rate = 0.1
+minimum_falloff_damage = 4.0
+round_reload_time = 0.4
+firing_cooldown = 3.0
+knockback_force = 0.1
+magazine_size = 7
+metadata/_custom_type_script = "uid://dlsygyd35nb1w"

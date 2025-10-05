@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://djl4d71ik8asv"]
+
+[ext_resource type="Script" uid="uid://crth6jqiypord" path="res://scripts/components/health/health_component.gd" id="1_h4o4x"]
+[ext_resource type="Script" uid="uid://bdbage368jc17" path="res://scripts/components/hurtbox/hurtbox_component.gd" id="2_emqj7"]
+[ext_resource type="Script" uid="uid://baqdhqqv2twlu" path="res://scripts/components/pickup_dropper/pickup_dropper_component.gd" id="3_emqj7"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pq22x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p3cig"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kd24y"]
+radius = 0.55343
+
+[node name="TargetDummy" type="CharacterBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_pq22x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_p3cig")
+debug_color = Color(9.62615e-08, 0.561308, 0.438947, 1)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("1_h4o4x")
+metadata/_custom_type_script = "uid://crth6jqiypord"
+
+[node name="HurtboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("2_emqj7")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://bdbage368jc17"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
+shape = SubResource("CapsuleShape3D_kd24y")
+debug_color = Color(0.823529, 0, 0.180392, 1)
+
+[node name="PickupDropper" type="Node" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("3_emqj7")
+health_component = NodePath("../HealthComponent")
+drop_health_pickups = true
+drop_amount = 1
+metadata/_custom_type_script = "uid://baqdhqqv2twlu"

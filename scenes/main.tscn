@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://dd81crvahr0cc"]
+
+[ext_resource type="PackedScene" uid="uid://cm6q2pumgi8qb" path="res://scenes/player/player.tscn" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://bohb8pc4hhnta" path="res://assets/ui/crosshair.png" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://ch3lwedeweuwi" path="res://scripts/ui/player_health_label.gd" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://djl4d71ik8asv" path="res://scenes/enemies/target_dummy/target_dummy.tscn" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://bq0n5vhwat0cp" path="res://scripts/ui/blood_coin_label.gd" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://cym3ygs3q21ei" path="res://scripts/ui/weapon_ammo_label.gd" id="5_tefeu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_sugp2"]
+sky_material = SubResource("ProceduralSkyMaterial_0wfyh")
+
+[sub_resource type="Environment" id="Environment_jyhfs"]
+background_mode = 2
+sky = SubResource("Sky_sugp2")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
+albedo_color = Color(0.0142752, 0.0142752, 0.0142752, 1)
+
+[node name="Main" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jyhfs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.391846, 0)
+use_collision = true
+size = Vector3(20, 0.216, 20)
+material = SubResource("StandardMaterial3D_sgp6g")
+
+[node name="Player" parent="." instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.227259, -4.16305)
+use_collision = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Crosshair" type="TextureRect" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0wfyh")
+
+[node name="PlayerHealthBar" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("3_jyhfs")
+
+[node name="BloodCoinCounter" type="Label" parent="UI"]
+offset_top = 23.0
+offset_right = 40.0
+offset_bottom = 46.0
+script = ExtResource("4_tbgi4")
+
+[node name="WeaponAmmo" type="Label" parent="UI"]
+offset_top = 46.0
+offset_right = 40.0
+offset_bottom = 69.0
+script = ExtResource("5_tefeu")
+
+[node name="TargetDummies" type="Node3D" parent="."]
+
+[node name="TargetDummy" parent="TargetDummies" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.585658, -7)
+
+[node name="PickupDropper" parent="TargetDummies/TargetDummy" index="4"]
+drop_blood_coins = true
+drop_health_pickups = false
+
+[node name="TargetDummy2" parent="TargetDummies" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66617, 0.585658, -7)
+
+[node name="PickupDropper" parent="TargetDummies/TargetDummy2" index="4"]
+drop_blood_coins = true
+drop_health_pickups = false
+drop_amount = 10
+
+[node name="TargetDummy3" parent="TargetDummies" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80077, 0.585658, -7)
+
+[node name="TargetDummy4" parent="TargetDummies" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19713, 0.585658, -7)
+
+[editable path="TargetDummies/TargetDummy"]
+[editable path="TargetDummies/TargetDummy2"]

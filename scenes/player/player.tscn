@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://cm6q2pumgi8qb"]
+
+[ext_resource type="Script" uid="uid://cxuma4lrurlyh" path="res://scenes/player/player_controller.gd" id="1_0owmy"]
+[ext_resource type="Resource" uid="uid://do5ouyvbrakdn" path="res://resources/player_resource.tres" id="2_qek5x"]
+[ext_resource type="Script" uid="uid://ce322nxydoggi" path="res://scripts/weapon_system/weapon_controller.gd" id="3_gmlin"]
+[ext_resource type="PackedScene" uid="uid://dh5kcuoesf6t1" path="res://scenes/weapons/revolver/revolver.tscn" id="4_75vfm"]
+[ext_resource type="PackedScene" uid="uid://b0d3qawpn2ky2" path="res://scenes/weapons/shotgun/shotgun.tscn" id="5_0owmy"]
+[ext_resource type="PackedScene" uid="uid://civvvtmbijwv4" path="res://scenes/weapons/rifle/rifle.tscn" id="6_qek5x"]
+[ext_resource type="Script" uid="uid://bimhnmbvq12h2" path="res://scenes/player/player_inventory.gd" id="7_0owmy"]
+[ext_resource type="Script" uid="uid://crth6jqiypord" path="res://scripts/components/health/health_component.gd" id="8_qek5x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qek5x"]
+radius = 2.0
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "collider", "camera", "health_component", "inventory_manager")]
+script = ExtResource("1_0owmy")
+player_resource = ExtResource("2_qek5x")
+head = NodePath("Head")
+collider = NodePath("CollisionShape3D")
+camera = NodePath("Head/Camera3D")
+health_component = NodePath("HealthComponent")
+inventory_manager = NodePath("InventoryManager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_x7p2l")
+debug_color = Color(0, 0.8, 1, 1)
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.683205, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="WeaponPosition" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472051, -0.577497, -0.822358)
+
+[node name="WeaponRaycast" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -1000)
+collide_with_areas = true
+
+[node name="WeaponController" type="Node3D" parent="."]
+script = ExtResource("3_gmlin")
+metadata/_custom_type_script = "uid://ce322nxydoggi"
+
+[node name="Revolver" parent="WeaponController" instance=ExtResource("4_75vfm")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.699658)
+
+[node name="Shotgun" parent="WeaponController" instance=ExtResource("5_0owmy")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.759494)
+
+[node name="Rifle" parent="WeaponController" instance=ExtResource("6_qek5x")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -1)
+
+[node name="RoundReloadTimer" type="Timer" parent="WeaponController"]
+one_shot = true
+
+[node name="FiringCooldownTimer" type="Timer" parent="WeaponController"]
+one_shot = true
+
+[node name="InventoryManager" type="Area3D" parent="." node_paths=PackedStringArray("player_health_component")]
+script = ExtResource("7_0owmy")
+player_health_component = NodePath("../HealthComponent")
+
+[node name="PickupCollider" type="CollisionShape3D" parent="InventoryManager"]
+shape = SubResource("SphereShape3D_qek5x")
+debug_color = Color(0.745098, 0.462745, 0.0392157, 1)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("8_qek5x")
+metadata/_custom_type_script = "uid://crth6jqiypord"
