@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cm6q2pumgi8qb"]
 
 [ext_resource type="Script" uid="uid://cxuma4lrurlyh" path="res://scenes/player/player_controller.gd" id="1_0owmy"]
-[ext_resource type="Resource" uid="uid://do5ouyvbrakdn" path="res://resources/player_resource.tres" id="2_qek5x"]
+[ext_resource type="Resource" uid="uid://do5ouyvbrakdn" path="res://resources/player/player_resource.tres" id="2_qek5x"]
 [ext_resource type="Script" uid="uid://ce322nxydoggi" path="res://scripts/weapon_system/weapon_controller.gd" id="3_gmlin"]
 [ext_resource type="PackedScene" uid="uid://dh5kcuoesf6t1" path="res://scenes/weapons/revolver/revolver.tscn" id="4_75vfm"]
 [ext_resource type="PackedScene" uid="uid://b0d3qawpn2ky2" path="res://scenes/weapons/shotgun/shotgun.tscn" id="5_0owmy"]
@@ -37,6 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472051, -0.577497, -0.82235
 
 [node name="WeaponRaycast" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, -1000)
+collision_mask = 2
 collide_with_areas = true
 
 [node name="WeaponController" type="Node3D" parent="."]
