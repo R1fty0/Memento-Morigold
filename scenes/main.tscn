@@ -1,12 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://dd81crvahr0cc"]
+[gd_scene load_steps=14 format=3 uid="uid://dd81crvahr0cc"]
 
 [ext_resource type="PackedScene" uid="uid://cm6q2pumgi8qb" path="res://scenes/player/player.tscn" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://bohb8pc4hhnta" path="res://assets/ui/crosshair.png" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://ch3lwedeweuwi" path="res://scripts/ui/player_health_label.gd" id="3_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://djl4d71ik8asv" path="res://scenes/enemies/target_dummy/target_dummy.tscn" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://bq0n5vhwat0cp" path="res://scripts/ui/blood_coin_label.gd" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://cym3ygs3q21ei" path="res://scripts/ui/weapon_ammo_label.gd" id="5_tefeu"]
 [ext_resource type="MeshLibrary" uid="uid://cnj860bs1a3p0" path="res://resources/tileset.tres" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://b6g77n5a6kp10" path="res://scenes/enemies/melee_skeleton/melee_skeleton.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://dxj7m5nvu6gbm" path="res://scenes/portal/portal.tscn" id="8_tipki"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
@@ -27,6 +27,10 @@ fog_density = 0.015
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
 albedo_color = Color(0.0142752, 0.0142752, 0.0142752, 1)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_choun"]
+vertices = PackedVector3Array(-7, 0.5, -3.5, -6.75, 0.5, -2, -5.25, 0.5, -1.75, -5.25, 0.5, 3.75, -2, 0.5, 3.75, -1.75, 0.5, 2.5, -8.25, 0.5, -9.75, 2.5, 0.5, -3.25, 5.5, 0.5, -9.75, -8.25, 0.5, -3.5, 2.5, 0.5, 2.5, 5.5, 0.5, -3.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 2), PackedInt32Array(0, 6, 2), PackedInt32Array(2, 6, 7), PackedInt32Array(7, 6, 8), PackedInt32Array(0, 9, 6), PackedInt32Array(10, 5, 7), PackedInt32Array(7, 5, 2), PackedInt32Array(8, 11, 7)]
 
 [node name="Main" type="Node"]
 
@@ -79,31 +83,13 @@ offset_right = 40.0
 offset_bottom = 69.0
 script = ExtResource("5_tefeu")
 
-[node name="TargetDummies" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.439557, 0)
+[node name="Portal" parent="." instance=ExtResource("8_tipki")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -3.54334, 1.98652, -3.14209)
 
-[node name="TargetDummy" parent="TargetDummies" instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.585658, -7)
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_choun")
 
-[node name="PickupDropper" parent="TargetDummies/TargetDummy" index="4"]
-drop_blood_coins = true
-drop_health_pickups = false
-
-[node name="TargetDummy2" parent="TargetDummies" instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66617, 0.585658, -7)
-
-[node name="PickupDropper" parent="TargetDummies/TargetDummy2" index="4"]
-drop_blood_coins = true
-drop_health_pickups = false
-drop_amount = 10
-
-[node name="TargetDummy3" parent="TargetDummies" instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80077, 0.585658, -7)
-
-[node name="TargetDummy4" parent="TargetDummies" instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19713, 0.585658, -7)
-
-[node name="GridMap" type="GridMap" parent="."]
+[node name="GridMap" type="GridMap" parent="NavigationRegion3D"]
 mesh_library = ExtResource("7_o6xl0")
 cell_size = Vector3(1.5, 1.5, 1.5)
 cell_center_y = false
@@ -113,8 +99,5 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Portal" parent="." instance=ExtResource("8_tipki")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -3.54334, 1.98652, -3.14209)
-
-[editable path="TargetDummies/TargetDummy"]
-[editable path="TargetDummies/TargetDummy2"]
+[node name="MeleeSkeleton" parent="." instance=ExtResource("8_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)

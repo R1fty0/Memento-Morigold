@@ -14,7 +14,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_qek5x"]
 radius = 2.0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "collider", "camera", "health_component", "inventory_manager")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "collider", "camera", "health_component", "inventory_manager") groups=["player"]]
 script = ExtResource("1_0owmy")
 player_resource = ExtResource("2_qek5x")
 head = NodePath("Head")

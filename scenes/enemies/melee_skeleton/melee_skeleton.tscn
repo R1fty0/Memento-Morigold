@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6g77n5a6kp10"]
+
+[ext_resource type="Script" uid="uid://dhggq2ump44la" path="res://scripts/components/npc/npc_component.gd" id="1_juuli"]
+[ext_resource type="Script" uid="uid://b6pbuqjq2mck5" path="res://scripts/state_machine/state_machine.gd" id="2_wpv1h"]
+[ext_resource type="Script" uid="uid://cfahh73onkb5o" path="res://scripts/enemy_states/melee_skeleton/melee_skeleton_chase.gd" id="4_vhs5j"]
+[ext_resource type="Script" uid="uid://dnkf815umvg3c" path="res://scripts/enemy_states/melee_skeleton/melee_skeleton_attack.gd" id="5_leexn"]
+[ext_resource type="Script" uid="uid://pdmdi618npmk" path="res://scripts/enemy_states/melee_skeleton/melee_skeleton_hit.gd" id="6_l6cd2"]
+[ext_resource type="Script" uid="uid://k738skvcjai5" path="res://scripts/enemy_states/melee_skeleton/melee_skeleton_die.gd" id="7_sd6v8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wpv1h"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pm0of"]
+
+[node name="MeleeSkeleton" type="Node3D"]
+
+[node name="NPC" type="CharacterBody3D" parent="." node_paths=PackedStringArray("agent")]
+script = ExtResource("1_juuli")
+agent = NodePath("NavigationAgent3D")
+metadata/_custom_type_script = "uid://dhggq2ump44la"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NPC"]
+mesh = SubResource("CapsuleMesh_wpv1h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC"]
+shape = SubResource("CapsuleShape3D_pm0of")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="NPC"]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_wpv1h")
+initial_state = NodePath("Chase")
+metadata/_custom_type_script = "uid://b6pbuqjq2mck5"
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
+script = ExtResource("4_vhs5j")
+npc = NodePath("../../NPC")
+metadata/_custom_type_script = "uid://cfahh73onkb5o"
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("5_leexn")
+metadata/_custom_type_script = "uid://dnkf815umvg3c"
+
+[node name="AttackRecoveryTimer" type="Timer" parent="StateMachine/Attack"]
+one_shot = true
+
+[node name="Hit" type="Node" parent="StateMachine"]
+script = ExtResource("6_l6cd2")
+metadata/_custom_type_script = "uid://pdmdi618npmk"
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource("7_sd6v8")
+metadata/_custom_type_script = "uid://k738skvcjai5"
+
+[node name="PersistantStateListener" type="Node" parent="."]
