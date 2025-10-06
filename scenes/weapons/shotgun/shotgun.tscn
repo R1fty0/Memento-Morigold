@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://b0d3qawpn2ky2"]
 
 [ext_resource type="Script" uid="uid://c25mxx3utyy6x" path="res://scenes/weapons/shotgun/shotgun.gd" id="1_ll5uh"]
-[ext_resource type="Resource" uid="uid://duioc0hydsgvx" path="res://resources/weapons/shotgun_resource.tres" id="2_ph3d6"]
+[ext_resource type="Resource" uid="uid://duioc0hydsgvx" path="res://resources/data/weapons/shotgun_resource.tres" id="2_ph3d6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tq7l"]
 resource_name = "Wood"

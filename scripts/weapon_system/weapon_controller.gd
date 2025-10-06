@@ -88,7 +88,7 @@ func _equip_weapon(weapon: Weapon):
 	current_weapon = weapon
 
 func _shoot_weapon(weapon: Weapon):
-		# Prevent the weapon from firing if there is no ammo in the magazine. 
+	# Prevent the weapon from firing if there is no ammo in the magazine. 
 	if current_weapon.weapon_resource.ammo_in_magazine <= 0:
 		can_current_weapon_fire = false
 	else:

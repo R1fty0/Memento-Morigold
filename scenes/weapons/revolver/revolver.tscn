@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://dh5kcuoesf6t1"]
 
 [ext_resource type="Script" uid="uid://bg6khgdfs0cah" path="res://scenes/weapons/revolver/revolver.gd" id="1_nv4ti"]
-[ext_resource type="Resource" uid="uid://bc58mu2j2b4x5" path="res://resources/weapons/revolver_resource.tres" id="2_p2cdn"]
+[ext_resource type="Resource" uid="uid://bc58mu2j2b4x5" path="res://resources/data/weapons/revolver_resource.tres" id="2_p2cdn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjd7f"]
 resource_name = "Wood.003"

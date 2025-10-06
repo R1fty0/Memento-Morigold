@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://civvvtmbijwv4"]
 
 [ext_resource type="Script" uid="uid://cg0i1t567ho7a" path="res://scenes/weapons/rifle/rifle.gd" id="1_ch8gi"]
-[ext_resource type="Resource" uid="uid://d0ajdnn5pngx4" path="res://resources/weapons/rifle_resource.tres" id="2_upv3j"]
+[ext_resource type="Resource" uid="uid://d0ajdnn5pngx4" path="res://resources/data/weapons/rifle_resource.tres" id="2_upv3j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofhfm"]
 resource_name = "Wood.002"

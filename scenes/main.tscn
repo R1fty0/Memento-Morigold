@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dd81crvahr0cc"]
+[gd_scene load_steps=13 format=3 uid="uid://dd81crvahr0cc"]
 
 [ext_resource type="PackedScene" uid="uid://cm6q2pumgi8qb" path="res://scenes/player/player.tscn" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://bohb8pc4hhnta" path="res://assets/ui/crosshair.png" id="2_0wfyh"]
@@ -25,9 +25,6 @@ tonemap_mode = 2
 fog_enabled = true
 fog_density = 0.015
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
-albedo_color = Color(0.0142752, 0.0142752, 0.0142752, 1)
-
 [sub_resource type="NavigationMesh" id="NavigationMesh_choun"]
 vertices = PackedVector3Array(-7, 0.5, -3.5, -6.75, 0.5, -2, -5.25, 0.5, -1.75, -5.25, 0.5, 3.75, -2, 0.5, 3.75, -1.75, 0.5, 2.5, -8.25, 0.5, -9.75, 2.5, 0.5, -3.25, 5.5, 0.5, -9.75, -8.25, 0.5, -3.5, 2.5, 0.5, 2.5, 5.5, 0.5, -3.5)
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 2), PackedInt32Array(0, 6, 2), PackedInt32Array(2, 6, 7), PackedInt32Array(7, 6, 8), PackedInt32Array(0, 9, 6), PackedInt32Array(10, 5, 7), PackedInt32Array(7, 5, 2), PackedInt32Array(8, 11, 7)]
@@ -37,18 +34,8 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Arr
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jyhfs")
 
-[node name="Ground" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.32919, 0)
-use_collision = true
-size = Vector3(20, 0.216, 20)
-material = SubResource("StandardMaterial3D_sgp6g")
-
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.227259, -4.16305)
-use_collision = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -100,4 +87,4 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="MeleeSkeleton" parent="." instance=ExtResource("8_85g3d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.344045, -8)

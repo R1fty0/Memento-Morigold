@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MeleeSkeletonResource" load_steps=2 format=3 uid="uid://8fyq2ily22xt"]
+
+[ext_resource type="Script" uid="uid://b6pqh2l0pk1bd" path="res://scripts/resources/melee_skeleton_resource.gd" id="1_fiqow"]
+
+[resource]
+script = ExtResource("1_fiqow")
+health = 100.0
+damage = 10.0
+speed = 1.5
+attack_range = 0.5
+time_between_attacks = 1.0
+rotation_speed = 20.0
+metadata/_custom_type_script = "uid://b6pqh2l0pk1bd"

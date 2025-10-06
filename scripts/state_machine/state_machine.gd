@@ -11,7 +11,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child 
-			child.transitioned.connect(_change_state)
+			child.transitioned.connect(change_state)
 	# Enter initial state. 		
 	if initial_state:
 		initial_state.enter_state()
@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	current_state.state_physics_process(delta)
 
-func _change_state(state: State, new_state_name: StringName):
+func change_state(state: State, new_state_name: StringName):
 	if state != current_state:
 		return
 	var new_state = states.get(new_state_name.to_lower())

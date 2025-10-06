@@ -1,18 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://cm6q2pumgi8qb"]
+[gd_scene load_steps=13 format=3 uid="uid://cm6q2pumgi8qb"]
 
 [ext_resource type="Script" uid="uid://cxuma4lrurlyh" path="res://scenes/player/player_controller.gd" id="1_0owmy"]
-[ext_resource type="Resource" uid="uid://do5ouyvbrakdn" path="res://resources/player/player_resource.tres" id="2_qek5x"]
+[ext_resource type="Resource" uid="uid://do5ouyvbrakdn" path="res://resources/data/player/player_resource.tres" id="2_qek5x"]
 [ext_resource type="Script" uid="uid://ce322nxydoggi" path="res://scripts/weapon_system/weapon_controller.gd" id="3_gmlin"]
 [ext_resource type="PackedScene" uid="uid://dh5kcuoesf6t1" path="res://scenes/weapons/revolver/revolver.tscn" id="4_75vfm"]
 [ext_resource type="PackedScene" uid="uid://b0d3qawpn2ky2" path="res://scenes/weapons/shotgun/shotgun.tscn" id="5_0owmy"]
 [ext_resource type="PackedScene" uid="uid://civvvtmbijwv4" path="res://scenes/weapons/rifle/rifle.tscn" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://bimhnmbvq12h2" path="res://scenes/player/player_inventory.gd" id="7_0owmy"]
 [ext_resource type="Script" uid="uid://crth6jqiypord" path="res://scripts/components/health/health_component.gd" id="8_qek5x"]
+[ext_resource type="Script" uid="uid://bdbage368jc17" path="res://scripts/components/hurtbox/hurtbox_component.gd" id="9_5gtgg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qek5x"]
 radius = 2.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h17s1"]
+radius = 0.638022
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "collider", "camera", "health_component", "inventory_manager") groups=["player"]]
 script = ExtResource("1_0owmy")
@@ -70,3 +74,12 @@ debug_color = Color(0.745098, 0.462745, 0.0392157, 1)
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("8_qek5x")
 metadata/_custom_type_script = "uid://crth6jqiypord"
+
+[node name="HurtboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("9_5gtgg")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://bdbage368jc17"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
+shape = SubResource("CapsuleShape3D_h17s1")
+debug_color = Color(0.92549, 0.0627451, 0.12549, 1)

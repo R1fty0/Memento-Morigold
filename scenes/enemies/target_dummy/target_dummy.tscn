@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crth6jqiypord" path="res://scripts/components/health/health_component.gd" id="1_h4o4x"]
 [ext_resource type="Script" uid="uid://bdbage368jc17" path="res://scripts/components/hurtbox/hurtbox_component.gd" id="2_emqj7"]
-[ext_resource type="Script" uid="uid://baqdhqqv2twlu" path="res://scripts/components/pickup_dropper/pickup_dropper_component.gd" id="3_emqj7"]
+[ext_resource type="Script" uid="uid://baqdhqqv2twlu" path="res://scripts/components/death_loot_dropper/death_loot_dropper.gd" id="3_emqj7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pq22x"]
 

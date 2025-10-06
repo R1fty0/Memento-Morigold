@@ -19,6 +19,7 @@ func take_damage(amount: float):
 		_die()
 	else:
 		current_health -= amount
+		#print("Object: " + str(get_parent().name) + "| Current Health: " + str(current_health))
 		took_damage.emit()
 
 func is_full_health() -> bool:
@@ -29,7 +30,6 @@ func is_full_health() -> bool:
 
 func _die():
 	died.emit()
-	get_parent().queue_free()
 
 func heal(amount: float):
 	if current_health < max_health:
